@@ -1,0 +1,19 @@
+{
+  "name": "native-password-input",
+  "version": "1.0.0",
+  "description": "password input with visibility control",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tildah/native-password-input.git"
+  },
+  "author": "Hamdi Tayeb Chouari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tildah/native-password-input/issues"
+  },
+  "homepage": "https://github.com/tildah/native-password-input#readme"
+}
