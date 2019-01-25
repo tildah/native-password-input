@@ -1,19 +1,47 @@
 {
-  "name": "native-password-input",
-  "version": "1.0.0",
-  "description": "password input with visibility control",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_from": "native-password-input",
+  "_id": "native-password-input@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-zrcS+W5b1JlBLg3nibCbmFKOziJLP8NFtB/McU25PfgzaFWVcOqeFVJrjBIRWcIK5A7oBhxLKIcuA4zFtgLr7g==",
+  "_location": "/native-password-input",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "native-password-input",
+    "name": "native-password-input",
+    "escapedName": "native-password-input",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/native-password-input/-/native-password-input-1.0.0.tgz",
+  "_shasum": "3b0891e0a0c0468fe7e4bfe90b5d0423b9b82bf7",
+  "_spec": "native-password-input",
+  "_where": "/home/gtx46/Desktop/testp",
+  "author": {
+    "name": "Hamdi Tayeb Chouari"
+  },
+  "bugs": {
+    "url": "https://github.com/tildah/native-password-input/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "password input with visibility control",
+  "homepage": "https://github.com/tildah/native-password-input#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "native-password-input",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tildah/native-password-input.git"
   },
-  "author": "Hamdi Tayeb Chouari",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tildah/native-password-input/issues"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/tildah/native-password-input#readme"
+  "version": "1.0.0"
 }

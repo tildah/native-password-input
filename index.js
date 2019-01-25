@@ -41,7 +41,7 @@ class NativePasswordInput extends HTMLElement {
             <div class=${'inputWithIcon'}>
                 <input id=${'password'} placeholder=${'password'} type=${'password'}>
                     <i aria-hidden="true">
-                    <img id=${'showPassword'} src=${'./img/closed.svg'}>
+                    <img id=${'showPassword'} src=${'./node_modules/native-password-input/img/closed.svg'}>
                     </i>
                 
             </div>
@@ -54,11 +54,11 @@ class NativePasswordInput extends HTMLElement {
                 var image = this.shadowRoot.getElementById('showPassword') ;
 
                 if(password.getAttribute('type') == 'password') {
-                    image.setAttribute('src','./img/open.svg');
+                    image.setAttribute('src','./node_modules/native-password-input/img/open.svg');
                     password.setAttribute('type', 'text');
                 }
                 else if (password.getAttribute('type') == 'text'){
-                    image.setAttribute('src','./img/closed.svg');
+                    image.setAttribute('src','./node_modules/native-password-input/img/closed.svg');
                     password.setAttribute('type', 'password');
                 }
             }
