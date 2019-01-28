@@ -1,12 +1,14 @@
 class NativePasswordInput extends HTMLElement {
     constructor() {
         super() ;
+        const placeholder = this.getAttribute('placeholder') ;
+        const name = this.getAttribute('name') ;
         this.attachShadow({ mode: "open" });
         this.shadowRoot.innerHTML = 
         /*html*/`
         <style>
             
-            #password, #username {
+            #password {
                 width: 30%;
                 border: 2px solid #aaa;
                 border-radius: 4px;
@@ -18,12 +20,12 @@ class NativePasswordInput extends HTMLElement {
                 padding-left: 40px;
             }
             
-            #password, #username : focus {
+            #password : focus {
                 border-color: dodgerBlue;
                 box-shadow: 0 0 8px 0 dodgerBlue;
             }
             
-            .putWithIcon .inputWithoutIcon {
+            .putWithIcon  {
                 position: relative;
             }
             
@@ -38,25 +40,20 @@ class NativePasswordInput extends HTMLElement {
                 height: 25px;
             }
             
-            .inputWithIcon #password, #username : focus + i {
+            .inputWithIcon #password : focus + i {
                 color: dodgerBlue;
             }
         </style>
-       
             <div class=${'inputWithIcon'}>
-                <input id=${'password'} placeholder=${'password'} type=${'password'}>
+                <input id=${'password'} placeholder="${placeholder}" type=${'password'} name="${name}">
                     <i aria-hidden="true">
                     <img id=${'showPassword'} src=${'./node_modules/native-password-input/img/closed.svg'}>
                     </i>
             </div>
-            <div class=${'inputWithoutIcon'}>
-                <input id=${'username'} placeholder=${'username'} type=${'text'}>
-        
-            </div>
          ` ;
     }
     connectedCallback() {
-        this.shadowRoot.getElementById('showPassword').addEventListener(
+         this.shadowRoot.getElementById('showPassword').addEventListener(
             'click', (event) => {
                 var password = this.shadowRoot.getElementById('password');
                 var image = this.shadowRoot.getElementById('showPassword') ;
@@ -71,8 +68,9 @@ class NativePasswordInput extends HTMLElement {
                 }
             }
         );
-        
+
     }
+
 }
 
 window.customElements.define("native-password-input", NativePasswordInput);
