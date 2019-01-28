@@ -19,7 +19,7 @@ npm install native-password-input
         <title>title</title>
     </head>
     <body>
-        <native-password-input></native-password-input>
+        <native-password-input placeholder="password..." name="native-password"></native-password-input>
         <script src="node_modules/native-password-input/index.js"></script>
     </body>
 </html>``
