@@ -5,7 +5,8 @@ class NativePasswordInput extends HTMLElement {
         this.shadowRoot.innerHTML = 
         /*html*/`
         <style>
-            #password {
+            
+            #password, #username {
                 width: 30%;
                 border: 2px solid #aaa;
                 border-radius: 4px;
@@ -16,13 +17,16 @@ class NativePasswordInput extends HTMLElement {
                 transition: 0.3s;
                 padding-left: 40px;
             }
-            #password: focus {
+            
+            #password, #username : focus {
                 border-color: dodgerBlue;
                 box-shadow: 0 0 8px 0 dodgerBlue;
             }
-            #inputWithIcon {
+            
+            .putWithIcon .inputWithoutIcon {
                 position: relative;
             }
+            
             #showPassword {
                 position: absolute;
                 left: 2px;
@@ -33,19 +37,23 @@ class NativePasswordInput extends HTMLElement {
                 width: 30px ;
                 height: 25px;
             }
-            #inputWithIcon #password : focus + i {
+            
+            .inputWithIcon #password, #username : focus + i {
                 color: dodgerBlue;
             }
         </style>
-        <div id=${'container'}>
+       
             <div class=${'inputWithIcon'}>
                 <input id=${'password'} placeholder=${'password'} type=${'password'}>
                     <i aria-hidden="true">
                     <img id=${'showPassword'} src=${'./node_modules/native-password-input/img/closed.svg'}>
                     </i>
-                
             </div>
-        </div>` ;
+            <div class=${'inputWithoutIcon'}>
+                <input id=${'username'} placeholder=${'username'} type=${'text'}>
+        
+            </div>
+         ` ;
     }
     connectedCallback() {
         this.shadowRoot.getElementById('showPassword').addEventListener(
