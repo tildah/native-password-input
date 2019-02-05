@@ -2,6 +2,13 @@
 
 a password input with visibility native web component.
 
+__Possible attributes:__
+
+- placeholder
+- name
+- password-value
+- background-color-att
+- border-att
 
 ## Installation
 
