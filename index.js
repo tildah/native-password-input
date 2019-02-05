@@ -84,7 +84,7 @@ class NativePasswordInput extends HTMLElement {
         this._border = this.getAttribute('border-att') ;
        
         this.shadowRoot.querySelector('input').addEventListener('focusout', (event) => {
-            document.getElementById('password').placeholder = this.shadowRoot.querySelector('input').value ;
+            document.getElementById('password').passwordValue = this.shadowRoot.querySelector('input').value ;
             this._passwordValue = this.shadowRoot.querySelector('input').value ;
          });
         
