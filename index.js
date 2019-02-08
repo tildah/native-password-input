@@ -53,11 +53,11 @@ class NativePasswordInput extends HTMLElement {
             </div>
          ` ;
     }
-    set passwordValue(value) {
-        this.setAttribute('password-value', value);
+    set value(value) {
+        this.setAttribute('value', value);
     };
-    get passwordValue() {
-        return this._passwordValue ;
+    get value() {
+        return this._value ;
     };
 
     set placeholder(value) {
@@ -79,11 +79,11 @@ class NativePasswordInput extends HTMLElement {
         this._placeholder = this.getAttribute('placeholder') ;
         if(!this._placeholder) {this._placeholder= " ";}
         this._name = this.getAttribute('name') ;
-        this._passwordValue = this.getAttribute('password-value') ;
+        this._value = this.getAttribute('value') ;
         this._backgroundColor = this.getAttribute('background-color-att') ;
         this._border = this.getAttribute('border-att') ;
        
-        this.shadowRoot.querySelector('input').addEventListener('focusout', (event) => {
+        this.shadowRoot.querySelector('input').addEventListener('keyup', (event) => {
             document.getElementById('password').passwordValue = this.shadowRoot.querySelector('input').value ;
             this._passwordValue = this.shadowRoot.querySelector('input').value ;
          });
@@ -109,7 +109,7 @@ class NativePasswordInput extends HTMLElement {
     render() {
         this.shadowRoot.querySelector('input').name = this._name ;
         this.shadowRoot.querySelector('input').placeholder = this._placeholder ;
-        this.shadowRoot.querySelector('input').value = this._passwordValue ;
+        this.shadowRoot.querySelector('input').value = this._value ;
         this.shadowRoot.querySelector('input').style.backgroundColor = this._backgroundColor ;
         this.shadowRoot.querySelector('input').style.border = this._border ;
     }
@@ -123,8 +123,8 @@ class NativePasswordInput extends HTMLElement {
             this._placeholder = newVal ;
         if(name == 'name')
             this._name = newVal ;
-        if(name == 'password-value')
-            this._passwordValue = newVal ;
+        if(name == 'value')
+            this._value = newVal ;
 
         this.render() ;
     }
