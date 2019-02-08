@@ -84,8 +84,8 @@ class NativePasswordInput extends HTMLElement {
         this._border = this.getAttribute('border-att') ;
        
         this.shadowRoot.querySelector('input').addEventListener('keyup', (event) => {
-            document.getElementById('password').passwordValue = this.shadowRoot.querySelector('input').value ;
-            this._passwordValue = this.shadowRoot.querySelector('input').value ;
+            document.getElementById('password').value = this.shadowRoot.querySelector('input').value ;
+            this._value = this.shadowRoot.querySelector('input').value ;
          });
         
          this.shadowRoot.getElementById('showPassword').addEventListener(
