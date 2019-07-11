@@ -11,11 +11,6 @@ npm install native-password-input
 
 ## Attributes
 
-- placeholder
-- name
-- value
-- icon-color
-
 | Attribute     | Default | Details/Example |
 |---------------|---------|---------|
 | `name`        | null    | `password` |
