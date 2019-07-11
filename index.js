@@ -1,133 +1,94 @@
+import "/node_modules/mdi-component/mdi-component.js";
+import { mdiEye, mdiEyeOff } from "/node_modules/@mdi/js/mdi.js";
+
 class NativePasswordInput extends HTMLElement {
-    constructor() {
-        super() ;
-        this.attachShadow({ mode: "open" });
-        
-        this.shadowRoot.innerHTML = 
-        /*html*/`
-        <style>
-            
-            #password {
-                width: 100%;
-                
-                font-size: 14px;
-                border-bottom: 1px solid rgba(0, 0, 0, .12);
-                
-                margin: 8px 0;
-                outline: none;
-                padding: 8px;
-                box-sizing: border-box;
-                transition: 0.3s;
-                padding-left: 40px;
-            }
-            
-            #password : focus {
-                border-color: dodgerBlue;
-                box-shadow: 0 0 8px 0 dodgerBlue;
-            }
-            
-            .inputWithIcon  {
-                position: relative;
-            }
-            
-            #showPassword {
-                position: absolute;
-                left: -2px ;
-                top: 5px;
-                padding: 9px 8px;
-                color: #aaa;
-                transition: 0.3s;
-                width: 30px ;
-                height: 25px;
-            }
-            
-            .inputWithIcon #password : focus + i {
-                color: rgba(0, 0, 0, .38);
-            }
-        </style>
-            <div class=${'inputWithIcon'}>
-                <i aria-hidden="true">
-                    <img id=${'showPassword'} src=${'./node_modules/native-password-input/img/closed.svg'}>
-                </i>
-                <input id=${'password'} value="" placeholder="" type=${'password'} name="">
-            </div>
-         ` ;
-    }
-    set value(value) {
-        this.setAttribute('value', value);
-    };
-    get value() {
-        return this._value ;
-    };
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    if (!this.id || !this.getAttribute("name"))
+      throw new Error("The password input should have an id and a name attributes");
+  }
 
-    set placeholder(value) {
-        this.setAttribute('placeholder', value);
-    };
-    get placeholder() {
-        return this._placeholder ;
-    };
+  get value() {
+    const defaultValue = this.getAttribute("value") || "";
+    return this.input ? this.input.value : defaultValue;
+  }
 
-    set name(value) {
-        this.setAttribute('name', value);
-    };
-    get name() {
-        return this._name ;
-    };
-    
+  get input() {
+    return this.shadowRoot.querySelector("input");
+  }
 
-    connectedCallback() {
-        this._placeholder = this.getAttribute('placeholder') ;
-        if(!this._placeholder) {this._placeholder= " ";}
-        this._name = this.getAttribute('name') ;
-        this._value = this.getAttribute('value') ;
-        this._backgroundColor = this.getAttribute('background-color-att') ;
-        this._border = this.getAttribute('border-att') ;
-       
-        this.shadowRoot.querySelector('input').addEventListener('keyup', (event) => {
-            document.getElementById('password').value = this.shadowRoot.querySelector('input').value ;
-            this._value = this.shadowRoot.querySelector('input').value ;
-         });
-        
-         this.shadowRoot.getElementById('showPassword').addEventListener(
-            'click', (event) => {
-                var password = this.shadowRoot.getElementById('password');
-                var image = this.shadowRoot.getElementById('showPassword') ;
+  get template() {
+    const open = this.hasAttribute("open");
+    const type = open ? "text" : "password";
+    const image = open ? mdiEye : mdiEyeOff;
+    return /*html*/`
+      <style>
 
-                if(password.getAttribute('type') == 'password') {
-                    image.setAttribute('src','./node_modules/native-password-input/img/open.svg');
-                    password.setAttribute('type', 'text');
-                }
-                else if (password.getAttribute('type') == 'text'){
-                    image.setAttribute('src','./node_modules/native-password-input/img/closed.svg');
-                    password.setAttribute('type', 'password');
-                }
-            }
-        );
-        this.render() ;
-    }
+        .container  {
+          background-color: transparent;
+          display: flex;
+          align-items: center;
+          margin: 8px;
+        }
 
-    render() {
-        this.shadowRoot.querySelector('input').name = this._name ;
-        this.shadowRoot.querySelector('input').placeholder = this._placeholder ;
-        this.shadowRoot.querySelector('input').value = this._value ;
-        this.shadowRoot.querySelector('input').style.backgroundColor = this._backgroundColor ;
-        this.shadowRoot.querySelector('input').style.border = this._border ;
-    }
+        input {
+          flex: 1;
+          border: none;
+          margin: 0 8px;
+          outline: none;
+          padding: 8px;
+        }
 
-    static get obserevedAttributes() {
-        return ['placeholder', 'name', 'password-value'] ;
-    }
+        .icon {
+          cursor: pointer;
+        }
+      </style>
+      <div class='container'>
+        <input 
+          id="${this.id}:input"
+          value="${this.value}" 
+          placeholder="${this.getAttribute("placeholder") || ""}"
+          type="${type}"
+          name="${this.getAttribute("name")}"
+          >
+        <mdi-component
+          class="icon"
+          size="24px"
+          path="${image}"
+          color="${this.getAttribute("icon-color") || ""}"
+          onclick="${this.id}.toggle()"
+          >
+        <mdi-component>
+      </div>
+    `
+  }
 
-    attributeChangedCallback(name, oldVal, newVal) {
-        if(name == 'placeholder')
-            this._placeholder = newVal ;
-        if(name == 'name')
-            this._name = newVal ;
-        if(name == 'value')
-            this._value = newVal ;
+  toggle() {
+    this.toggleAttribute("open");
+  }
 
-        this.render() ;
-    }
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    const templateEl = document.createElement("template");
+    templateEl.innerHTML = this.template;
+    this.shadowRoot.innerHTML = "";
+    this.shadowRoot.appendChild(templateEl.content.cloneNode(true));
+    this.input.focus();
+    const cursorPosition = this.value.length;
+    this.input.setSelectionRange(cursorPosition, cursorPosition);
+  }
+
+  static get observedAttributes() {
+    return ['placeholder', 'name', 'value', "open"];
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    this.render();
+  }
 }
 
 window.customElements.define("native-password-input", NativePasswordInput);
