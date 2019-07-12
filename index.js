@@ -1,3 +1,4 @@
+import "/node_modules/dispatcher-button/dispatcher-button.js"
 import "/node_modules/mdi-component/mdi-component.js";
 import { mdiEye, mdiEyeOff } from "/node_modules/@mdi/js/mdi.js";
 
@@ -7,6 +8,17 @@ class NativePasswordInput extends HTMLElement {
     this.attachShadow({ mode: "open" });
     if (!this.id || !this.getAttribute("name"))
       throw new Error("The password input should have an id and a name attributes");
+    this.watch();
+  }
+
+  watch() {
+    document.addEventListener(this.toggleEvent, (e) => {
+      this.toggle();
+    })
+  }
+
+  get toggleEvent() {
+    return `${this.id}:toggle`;
   }
 
   get value() {
@@ -52,14 +64,15 @@ class NativePasswordInput extends HTMLElement {
           type="${type}"
           name="${this.getAttribute("name")}"
           >
-        <mdi-component
-          class="icon"
-          size="24px"
-          path="${image}"
-          color="${this.getAttribute("icon-color") || ""}"
-          onclick="${this.id}.toggle()"
-          >
-        <mdi-component>
+        <dispatcher-button clk="${this.toggleEvent}">
+          <mdi-component
+            class="icon"
+            size="24px"
+            path="${image}"
+            color="${this.getAttribute("icon-color") || ""}"
+            >
+          <mdi-component>
+        </dispatcher-button>
       </div>
     `
   }
