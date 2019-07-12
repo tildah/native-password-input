@@ -50,6 +50,7 @@ class NativePasswordInput extends HTMLElement {
           margin: 0 8px;
           outline: none;
           padding: 8px;
+          background-color: transparent;
         }
 
         .icon {
