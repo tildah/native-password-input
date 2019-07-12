@@ -43,7 +43,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.6.0",
+  "version": "1.6.1",
   "dependencies": {
     "@mdi/js": "^3.7.95",
     "dispatcher-button": "0.0.1",
