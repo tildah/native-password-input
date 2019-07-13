@@ -59,7 +59,7 @@ class NativePasswordInput extends HTMLElement {
       </style>
       <div class='container'>
         <input 
-          id="${this.id}:input"
+          id="${this.id}-input"
           value="${this.value}" 
           placeholder="${this.getAttribute("placeholder") || ""}"
           type="${type}"
